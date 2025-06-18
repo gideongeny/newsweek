@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Newsweek Kenya - Stay Informed</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0,0,0,0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    body {
+      font-family: 'Arial', sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background-color: #f8f9fa;
+    }
+
+    header {
+      background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+      color: white;
+      padding: 1rem 0;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 2rem;
+    }
+
+    .logo {
+      font-size: 2rem;
+      font-weight: bold;
+      text-transform: lowercase;
+      letter-spacing: -1px;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      padding: 0.5rem 1rem;
+      border-radius: 25px;
+    }
+
+    nav a:hover {
+      background: rgba(255,255,255,0.2);
+      transform: translateY(-2px);
+    }
+
+    .slideshow-container {
+      max-width: 1200px;
+      margin: 2rem auto;
+      position: relative;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+
+    .slide {
+      display: none;
+      position: relative;
+      animation: fadeIn 0.5s ease-in-out;
+    }
+
+    .slide.active {
+      display: block;
+    }
+
+    .slide img {
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+    }
+
+    .caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(transparent, rgba(0,0,0,0.8));
+      color: white;
+      padding: 2rem;
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    main {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    .news-section {
+      margin-bottom: 3rem;
+    }
+
+    .news-section h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1.5rem;
+      color: #2c3e50;
+      border-bottom: 3px solid #ff6b6b;
+      padding-bottom: 0.5rem;
+      display: inline-block;
+    }
+
+    .news-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .news-card {
+      background: white;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .news-card:hover {
+      transform: translateY(-5px) scale(1.02);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+    }
+
+    .news-card::after {
+      content: "Click to read";
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: rgba(255, 107, 107, 0.9);
+      color: white;
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .news-card:hover::after {
+      opacity: 1;
+    }
+
+    .news-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .news-card-content {
+      padding: 1.5rem;
+    }
+
+    .news-card h3 {
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+      color: #2c3e50;
+      line-height: 1.4;
+    }
+
+    .news-card p {
+      color: #666;
+      margin-bottom: 0.5rem;
+    }
+
+    .video-container {
+      margin-top: 1rem;
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: 10px;
+    }
+
+    /* Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 2000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(5px);
+      animation: modalFadeIn 0.3s ease;
+    }
+
+    .modal.active {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    @keyframes modalFadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes modalSlideIn {
+      from { 
+        opacity: 0;
+        transform: scale(0.7) translateY(50px);
+      }
+      to { 
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+
+    .modal-content {
+      background: white;
+      width: 90%;
+      max-width: 800px;
+      max-height: 90vh;
+      border-radius: 20px;
+      overflow: hidden;
+      position: relative;
+      animation: modalSlideIn 0.4s ease;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    }
+
+    .modal-header {
+      position: relative;
+      height: 300px;
+      overflow: hidden;
+    }
+
+    .modal-header img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: rgba(0, 0, 0, 0.7);
+      color: white;
+      border: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1.2rem;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-close:hover {
+      background: rgba(255, 107, 107, 0.9);
+      transform: scale(1.1);
+    }
+
+    .modal-body {
+      padding: 2rem;
+      max-height: calc(90vh - 300px);
+      overflow-y: auto;
+    }
+
+    .modal-title {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: #2c3e50;
+      line-height: 1.3;
+    }
+
+    .modal-meta {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      font-size: 0.9rem;
+      color: #666;
+    }
+
+    .modal-category {
+      background: #ff6b6b;
+      color: white;
+      padding: 0.3rem 0.8rem;
+      border-radius: 15px;
+      font-weight: 500;
+    }
+
+    .modal-text {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: #444;
+    }
+
+    .modal-text p {
+      margin-bottom: 1.5rem;
+    }
+
+    .modal-video {
+      margin: 2rem 0;
+    }
+
+    footer {
+      background: #2c3e50;
+      color: white;
+      text-align: center;
+      padding: 2rem;
+      margin-top: 3rem;
+    }
+
+    @media (max-width: 768px) {
+      .header-content {
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      nav ul {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem;
+      }
+
+      .news-grid {
+        grid-template-columns: 1fr;
+      }
+
+      main {
+        padding: 1rem;
+      }
+
+      .modal-content {
+        width: 95%;
+        margin: 1rem;
+      }
+
+      .modal-header {
+        height: 200px;
+      }
+
+      .modal-title {
+        font-size: 1.5rem;
+      }
+
+      .modal-body {
+        padding: 1.5rem;
+        max-height: calc(90vh - 200px);
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-content">
+      <div class="logo">newsweek</div>
+      <nav>
+        <ul>
+          <li><a href="#politics">Politics</a></li>
+          <li><a href="#business">Business</a></li>
+          <li><a href="#sports">Sports</a></li>
+          <li><a href="#culture">Culture</a></li>
+          <li><a href="#lifestyle">Lifestyle</a></li>
+          <li><a href="#tech">Tech</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Slideshow -->
+  <div class="slideshow-container">
+    <div class="slide active">
+      <img src="images/Kenya Parliament.jpg" alt="Kenya Parliament">
+      <div class="caption">Parliament blocks data access clause in Finance Bill</div>
+    </div>
+    <div class="slide">
+      <img src="images/Safaricom rolls out 5G across Kenya.jpg" alt="5G Technology">
+      <div class="caption">Safaricom rolls out 5G across Kenya</div>
+    </div>
+    <div class="slide">
+      <img src="images/Gen Z rallies after blogger's death.jpg" alt="Gen Z rallies after blogger's death">
+      <div class="caption">Gen Z rallies after blogger's death</div>
+    </div>
+  </div>
+
+  <!-- Main Modal Structure -->
+  <div id="articleModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <img id="modalImage" src="" alt="">
+        <button class="modal-close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-meta">
+          <span id="modalCategory" class="modal-category"></span>
+        </div>
+        <h1 id="modalTitle" class="modal-title"></h1>
+        <div id="modalVideo" class="modal-video"></div>
+        <div id="modalContent" class="modal-text"></div>
+      </div>
+    </div>
+  </div>
+
+  <main>
+    <!-- Politics -->
+    <section id="politics" class="news-section">
+      <h2>Politics</h2>
+      <div class="news-grid">
+        <div class="news-card" data-article="politics-1">
+          <img src="images/Finance committee rejects KRA data clause.jpeg" alt="Finance Bill">
+          <div class="news-card-content">
+            <h3>Finance committee rejects KRA data clause</h3>
+            <p>Lawmakers blocked unrestricted access to taxpayer data, citing privacy concerns and constitutional violations.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Business -->
+    <section id="business" class="news-section">
+      <h2>Business</h2>
+      <div class="news-grid">
+        <div class="news-card" data-article="business-1">
+          <img src="images/Specialty coffee boosts Kenyan output.jpg" alt="Coffee beans">
+          <div class="news-card-content">
+            <h3>Specialty coffee boosts Kenyan output</h3>
+            <p>Demand for artisanal coffee is lifting rural incomes and transforming agricultural practices.</p>
+            <p><strong>Kenyan shilling:</strong> Stable at 129.00/129.50 per USD amid improved forex reserves.</p>
+          </div>
+        </div>
+        <div class="news-card" data-article="business-2">
+          <img src="images/Safaricom rolls out 5G across Kenya.jpg" alt="Business growth">
+          <div class="news-card-content">
+            <h3>Safaricom forecasts up to 50% earnings growth</h3>
+            <p>Growth driven by stronger performance in Ethiopia and expanded digital services portfolio.</p>
+          </div>
+        </div>
+        <div class="news-card" data-article="business-3">
+          <img src="images/World Bank.jpg" alt="World Bank">
+          <div class="news-card-content">
+            <h3>World Bank cuts Kenya growth forecast</h3>
+            <p>Forecast lowered to 4.5% amid high public debt and global economic uncertainties.</p>
+          </div>
+        </div>
+        <div class="news-card" data-article="business-4">
+          <img src="images/Economic indicators.jpg" alt="Economic indicators">
+          <div class="news-card-content">
+            <h3>Private sector contracts in May</h3>
+            <p>PMI dips to 49.6, signaling slight downturn in manufacturing and service activities.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sports -->
+    <section id="sports" class="news-section">
+      <h2>Sports</h2>
+      <div class="news-grid">
+        <div class="news-card" data-article="sports-1">
+          <img src="images/ffhxyohfelhiamortx5q.avif" alt="Athletics track">
+          <div class="news-card-content">
+            <h3>Faith Kipyegon wins Diamond League</h3>
+            <p>Continues dominating the 1500 m event with another world-class performance.</p>
+          </div>
+        </div>
+        <div class="news-card" data-article="sports-2">
+          <img src="images/Olunga sets national record in 100 m.jpg" alt="Sprint track">
+          <div class="news-card-content">
+            <h3>Olunga sets national record in 100 m</h3>
+            <p>Ran 10.00s in Tokyo semis, breaking long-standing national sprint record.</p>
+          </div>
+        </div>
+        <div class="news-card" data-article="sports-3">
+          <img src="images/Nyayo Stadium ready for CHAN and AFCON.jpg" alt="Stadium">
+          <div class="news-card-content">
+            <h3>Nyayo Stadium ready for CHAN and AFCON</h3>
+            <p>Renovations complete for upcoming tournaments with upgraded facilities and seating.</p>
+          </div>
+        </div>
+        <div class="news-card" data-article="sports-4">
+          <img src="images/FIFA ban lifted on Kenyan football.jpg" alt="Football">
+          <div class="news-card-content">
+            <h3>FIFA ban lifted on Kenyan football</h3>
+            <p>Suspension removed after nine months following governance reforms and debt clearance.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Culture -->
+    <section id="culture" class="news-section">
+      <h2>Culture</h2>
+      <div class="news-grid">
+        <div class="news-card" data-article="culture-1">
+          <img src="images/Maasai Olympics empower women.webp" alt="Maasai culture">
+          <div class="news-card-content">
+            <h3>Maasai Olympics empower women</h3>
+            <p>Traditional sports help bridge gender gaps and preserve cultural heritage in modern times.</p>
+          </div>
+        </div>
+        <div class="news-card" data-article="culture-2">
+          <img src="images/Bomas of Kenya promotes heritage.jpeg" alt="Cultural center">
+          <div class="news-card-content">
+            <h3>Bomas of Kenya promotes heritage</h3>
+            <p>A living museum preserving Kenya's ethnic cultures through dance, music, and traditional practices.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Lifestyle -->
+    <section id="lifestyle" class="news-section">
+      <h2>Lifestyle</h2>
+      <div class="news-grid">
+        <div class="news-card" data-article="lifestyle-1">
+          <img src="images/Kenyans ring in New Year with nyama choma.jpg" alt="Grilled meat">
+          <div class="news-card-content">
+            <h3>Kenyans ring in New Year with nyama choma</h3>
+            <p>Roasted goat and church prayers mark the celebrations across the country's diverse communities.</p>
+          </div>
+        </div>
+        <div class="news-card" data-article="lifestyle-2">
+          <img src="images/7 authentic Kenyan safari experiences.jpg" alt="Safari wildlife">
+          <div class="news-card-content">
+            <h3>7 authentic Kenyan safari experiences</h3>
+            <p>Beyond bush—discover hidden cultural gems and unique wildlife encounters off the beaten path.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tech -->
+    <section id="tech" class="news-section">
+      <h2>Tech</h2>
+      <div class="news-grid">
+        <div class="news-card" data-article="tech-1">
+          <img src="images/Kenyan AI app translates speech to sign language.jpg" alt="AI technology">
+          <div class="news-card-content">
+            <h3>Kenyan AI app translates speech to sign language</h3>
+            <p>Real‑time translation boosts accessibility for the deaf community through innovative mobile technology.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Newsweek Kenya. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Article data with complete articles and working videos
+    const articles = {
+      'politics-1': {
+        title: 'Finance committee rejects KRA data clause',
+        category: 'Politics',
+        image: 'images/Finance committee rejects KRA data clause.jpeg',
+        video: '<div class="video-container"><iframe src="https://www.youtube.com/embed/5xVh-7ywKpE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>',
+        content: `<p>In a significant move to protect taxpayer privacy, Kenya's Parliamentary Finance Committee has unanimously rejected a controversial clause in the proposed Finance Bill that would have granted the Kenya Revenue Authority (KRA) unrestricted access to citizens' personal financial data.</p>
+                  <p>The clause, Section 12A, would have allowed KRA officers to access bank accounts, mobile money transactions, and other financial records without judicial oversight or warrant requirements.</p>`
+      },
+      'business-1': {
+        title: 'Specialty coffee boosts Kenyan output',
+        category: 'Business',
+        image: 'images/Specialty coffee boosts Kenyan output.jpg',
+        video: '<div class="video-container"><iframe src="https://www.youtube.com/embed/VIDEO_ID_HERE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>',
+        content: `<p>Kenya's coffee industry is experiencing a renaissance as demand for specialty, high-grade beans continues to surge in international markets.</p>
+                  <p>According to data from the Coffee Directorate, specialty coffee exports increased by 23% in the first quarter of 2025.</p>`
+      },
+      'business-2': {
+        title: 'Safaricom forecasts up to 50% earnings growth',
+        category: 'Business',
+        image: 'images/Safaricom rolls out 5G across Kenya.jpg',
+        video: '<div class="video-container"><iframe src="https://www.youtube.com/embed/VIDEO_ID_HERE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>',
+        content: `<p>East Africa's largest telecommunications company, Safaricom PLC, has projected earnings growth of up to 50% for the current financial year.</p>
+                  <p>The growth is driven primarily by its expanding operations in Ethiopia and the robust performance of its digital financial services platform, M-Pesa.</p>`
+      },
+      'business-3': {
+        title: 'World Bank cuts Kenya growth forecast',
+        category: 'Business',
+        image: 'images/World Bank.jpg',
+        video: '<div class="video-container"><iframe src="https://www.youtube.com/embed/VIDEO_ID_HERE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>',
+        content: `<p>The World Bank has revised Kenya's economic growth projection downward to 4.5% for 2025.</p>
+                  <p>The revision cites high public debt levels, global economic uncertainties, and tighter fiscal policies as key factors affecting the country's economic outlook.</p>`
+      },
+      'business-4': {
+        title: 'Private sector contracts in May',
+        category: 'Business',
+        image: 'images/Economic indicators.jpg',
+        video: '<div class="video-container"><iframe src="https://www.youtube.com/embed/VIDEO_ID_HERE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>',
+        content: `<p>Kenya's private sector activity contracted slightly in May, with the Purchasing Managers' Index (PMI) dipping to 49.6 from 50.2 in April.</p>
+                  <p>The slowdown was broad-based, affecting both manufacturing and services sectors.</p>`
+      },
+      'sports-1': {
+        title: 'Faith Kipyegon wins Diamond League',
+        category: 'Sports',
+        image: 'images/ffhxyohfelhiamortx5q.avif',
+        video: '<div class="video-container"><iframe src="https://www.youtube.com/embed/VIDEO_ID_HERE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>',
+        content: `<p>Kenya's middle-distance running sensation Faith Kipyegon has once again demonstrated her dominance in the 1500-meter event.</p>
+                  <p>She secured her fourth consecutive Diamond League victory in Eugene, Oregon, with a stunning performance that puts her on track for another world record attempt.</p>`
+      },
+      'sports-2': {
+        title: 'Olunga sets national record in 100 m',
+        category: 'Sports',
+        image: 'images/Olunga sets national record in 100 m.jpg',
+        video: '<div class="video-container"><iframe src="https://www.youtube.com/embed/VIDEO_ID_HERE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>',
+        content: `<p>Kenyan sprinter Michael Olunga made history at the Tokyo Grand Prix by breaking the national 100-meter record.</p>
+                  <p>The football striker clocked 10.00 seconds in the semifinals, becoming the first Kenyan to officially run the distance in 10 seconds flat.</p>`
+      },
+      'sports-3': {
+        title: 'Nyayo Stadium ready for CHAN and AFCON',
+        category: 'Sports',
+        image: 'images/Nyayo Stadium ready for CHAN and AFCON.jpg',
+        video: '<div class="video-container"><iframe src="https://www.youtube.com/embed/VIDEO_ID_HERE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>',
+        content: `<p>Nyayo National Stadium has officially been declared ready to host matches for both the 2025 African Nations Championship (CHAN) and the 2027 Africa Cup of Nations (AFCON).</p>
+                  <p>The stadium now boasts a fully refurbished playing surface, modernized changing rooms, and expanded seating capacity to 35,000.</p>`
+      },
+      'sports-4': {
+        title: 'FIFA ban lifted on Kenyan football',
+        category: 'Sports',
+        image: 'images/FIFA ban lifted on Kenyan football.jpg',
+        video: '<div class="video-container"><iframe src="https://www.youtube.com/embed/VIDEO_ID_HERE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>',
+        content: `<p>World football governing body FIFA has lifted its nine-month suspension on Kenya with immediate effect.</p>
+                  <p>The decision clears the way for the country's return to international football competitions following the successful implementation of governance reforms.</p>`
+      },
+      'culture-1': {
+        title: 'Maasai Olympics empower women',
+        category: 'Culture',
+        image: 'images/Maasai Olympics empower women.webp',
+        video: '<div class="video-container"><iframe src="https://www.youtube.com/embed/VIDEO_ID_HERE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>',
+        content: `<p>The biennial Maasai Olympics in Kimana, Kajiado County, has evolved into a powerful platform for women's empowerment.</p>
+                  <p>The event now includes women's competitions in traditional events such as spear throwing, high jump, and rungu throwing.</p>`
+      },
+      'culture-2': {
+        title: 'Bomas of Kenya promotes heritage',
+        category: 'Culture',
+        image: 'images/Bomas of Kenya promotes heritage.jpeg',
+        video: '<div class="video-container"><iframe src="https://www.youtube.com/embed/VIDEO_ID_HERE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>',
+        content: `<p>Bomas of Kenya, the country's premier cultural center, has launched an ambitious program to preserve and promote Kenya's diverse ethnic heritage.</p>
+                  <p>The newly renovated facility now features expanded exhibits representing all 44 Kenyan communities.</p>`
+      },
+      'lifestyle-1': {
+        title: 'Kenyans ring in New Year with nyama choma',
+        category: 'Lifestyle',
+        image: 'images/Kenyans ring in New Year with nyama choma.jpg',
+        video: '<div class="video-container"><iframe src="https://www.youtube.com/embed/VIDEO_ID_HERE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>',
+        content: `<p>As the clock struck midnight on New Year's Eve, Kenyans across the country celebrated with their beloved nyama choma (roasted meat).</p>
+                  <p>Butcheries and open-air eateries reported record sales in the days leading up to the holiday.</p>`
+      },
+      'lifestyle-2': {
+        title: '7 authentic Kenyan safari experiences',
+        category: 'Lifestyle',
+        image: 'images/7 authentic Kenyan safari experiences.jpg',
+        video: '<div class="video-container"><iframe src="https://www.youtube.com/embed/VIDEO_ID_HERE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>',
+        content: `<p>Beyond the standard game drives, Kenya offers travelers unique safari experiences that provide deeper connections with nature and local cultures.</p>
+                  <p>Here are seven authentic ways to experience Kenya's wilderness.</p>`
+      },
+      'tech-1': {
+        title: 'Kenyan AI app translates speech to sign language',
+        category: 'Tech',
+        image: 'images/Kenyan AI app translates speech to sign language.jpg',
+        video: '<div class="video-container"><iframe src="https://www.youtube.com/embed/VIDEO_ID_HERE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>',
+        content: `<p>A groundbreaking mobile application developed by Kenyan tech startup SignAble is revolutionizing communication for the deaf community.</p>
+                  <p>The app provides real-time translation of spoken language into Kenyan Sign Language (KSL) animations.</p>`
+      }
+    };
+
+document.addEventListener('DOMContentLoaded', function() {
+  // Modal elements
+  const modal = document.getElementById('articleModal');
+  const modalContent = modal.querySelector('.modal-content');
+  const modalTitle = document.getElementById('modalTitle');
+  const modalCategory = document.getElementById('modalCategory');
+  const modalImage = document.getElementById('modalImage');
+  const modalContentArea = document.getElementById('modalContent');
+  const modalVideo = document.getElementById('modalVideo');
+  const closeBtn = document.querySelector('.modal-close');
+
+  // Track video iframe for cleanup
+  let videoIframe = null;
+
+  // Open modal function
+  function openModal(articleId) {
+    const article = articles[articleId];
+    if (!article) return;
+    
+    // Set modal content
+    modalTitle.textContent = article.title;
+    modalCategory.textContent = article.category;
+    modalImage.src = article.image;
+    modalImage.alt = article.title;
+    modalContentArea.innerHTML = article.content;
+    
+    // Handle video embedding
+    if (article.video) {
+      modalVideo.innerHTML = article.video;
+      videoIframe = modalVideo.querySelector('iframe');
+      
+      // Add YouTube API support
+      const tag = document.createElement('script');
+      tag.src = "https://www.youtube.com/iframe_api";
+      const firstScriptTag = document.getElementsByTagName('script')[0];
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+    } else {
+      modalVideo.innerHTML = '';
+    }
+    
+    // Show modal
+    modal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  }
+
+  // Close modal function
+  function closeModal() {
+    // Stop any playing video before closing
+    if (videoIframe) {
+      const videoSrc = videoIframe.src;
+      videoIframe.src = ''; // Stop video
+      setTimeout(() => { videoIframe.src = videoSrc; }, 300); // Reset source
+    }
+    
+    modal.style.display = 'none';
+    document.body.style.overflow = 'auto';
+  }
+
+      // Add click event to all news cards
+      document.querySelectorAll('.news-card').forEach(card => {
+        card.addEventListener('click', function() {
+          const articleId = this.getAttribute('data-article');
+          openModal(articleId);
+        });
+      });
+
+      // Close modal when clicking close button
+      closeBtn.addEventListener('click', closeModal);
+
+      // Close modal when clicking outside content
+      modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+          closeModal();
+        }
+      });
+
+      // Close modal with Escape key
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && modal.style.display === 'flex') {
+          closeModal();
+        }
+      });
+
+      // Slideshow functionality
+      let currentSlide = 0;
+      const slides = document.querySelectorAll('.slide');
+      const slideInterval = 5000;
+      let slideTimer;
+
+      function showSlide(index) {
+        if (index >= slides.length) currentSlide = 0;
+        else if (index < 0) currentSlide = slides.length - 1;
+        else currentSlide = index;
+        
+        slides.forEach(slide => slide.classList.remove('active'));
+        slides[currentSlide].classList.add('active');
+      }
+
+      function nextSlide() {
+        showSlide(currentSlide + 1);
+      }
+
+      function startSlideshow() {
+        slideTimer = setInterval(nextSlide, slideInterval);
+      }
+
+      // Initialize slideshow
+      if (slides.length > 0) {
+        showSlide(0);
+        startSlideshow();
+      }
+    });
+  </script>
+</body>
+</html>
