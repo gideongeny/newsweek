@@ -207,10 +207,10 @@ const modalClose = document.querySelector('#articleModal .modal-close');
 // === The Guardian API Integration ===
 // Use backend proxy for NewsAPI
 const NEWSAPI_KEY = 'f0c7f9cbed7347dc888cee85220af58a';
-const NEWSAPI_BASE = 'http://localhost:3001/newsapi';
+const NEWSAPI_BASE = 'https://newsweek.onrender.com/newsapi';
 
 // Use backend proxy for Guardian API
-const GUARDIAN_BASE = 'http://localhost:3001/guardian';
+const GUARDIAN_BASE = 'https://newsweek.onrender.com/guardian';
 
 const newsSections = [
   { id: 'breaking', title: 'Breaking News', params: { q: 'Kenya breaking news OR latest news OR top stories', 'show-fields': 'thumbnail,trailText,body', 'order-by': 'newest', 'page-size': 12 }, keywords: ['breaking', 'alert', 'urgent', 'update', 'news'] },
@@ -248,7 +248,7 @@ function buildNewsCard(article, labelOverride) {
 // Helper: fetch extra news from NewsAPI for any section if Guardian returns too few
 async function fetchExtraNewsFromNewsAPI(section, existingUrls = [], needed = 10) {
   const NEWSAPI_KEY = 'f0c7f9cbed7347dc888cee85220af58a';
-  const NEWSAPI_BASE = 'http://localhost:3001/newsapi';
+  const NEWSAPI_BASE = 'https://newsweek.onrender.com/newsapi';
   // Use section's keywords or title for NewsAPI query
   let q = (section.keywords && section.keywords.length) ? section.keywords.join(' OR ') : section.title;
   // Special case for Africa: use 'Africa' and all countries
