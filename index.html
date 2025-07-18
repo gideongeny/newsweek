@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Newsweek Kenya - Stay Informed</title>
+  <title>Newsweek Kenya</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
@@ -62,6 +62,8 @@
     "description": "Massive protests mark one-year anniversary of 2024 anti-tax demonstrations, sparked by recent custody death and controversial security legislation."
   }
   </script>
+  <!-- Add world-class news font -->
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
   <div class="top-bar" role="banner">
@@ -70,18 +72,13 @@
         <i class="fas fa-sun"></i>
         <span id="weather-display">Nairobi: Loading...</span>
       </div>
-      <div class="social-links">
-        <a href="#" aria-label="Follow us on Facebook"><i class="fab fa-facebook"></i></a>
-        <a href="#" aria-label="Follow us on Twitter"><i class="fab fa-twitter"></i></a>
-        <a href="#" aria-label="Follow us on Instagram"><i class="fab fa-instagram"></i></a>
-        <a href="#" aria-label="Subscribe to our YouTube channel"><i class="fab fa-youtube"></i></a>
-      </div>
+      <!-- Social links removed from here -->
     </div>
   </div>
   <header role="banner">
     <div class="header-content">
       <div class="header-row">
-        <div class="logo">
+        <div class="logo" style="font-family: 'Merriweather', serif; margin-left: 0;">
           <a href="/" aria-label="Newsweek Kenya Home">
             <span class="logo-text">Newsweek</span>
             <span class="logo-country">Kenya</span>
@@ -97,7 +94,6 @@
           <button aria-label="Search"><i class="fas fa-search"></i></button>
         </div>
         <button class="dark-mode-toggle" id="darkModeToggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i><span class="sr-only">Dark Mode</span></button>
-        <!-- Removed desktop subscribe button here -->
       </div>
       <nav class="main-nav desktop-nav" role="navigation" aria-label="Main Navigation">
         <ul>
@@ -126,12 +122,7 @@
           <li><a href="#science" class="nav-item"><i class="fas fa-flask"></i> Science</a></li>
         </ul>
         <button class="subscribe-btn" id="subscribeBtnMobile">Subscribe</button>
-        <div class="mobile-social-links">
-          <a href="#" aria-label="Follow us on Facebook"><i class="fab fa-facebook"></i></a>
-          <a href="#" aria-label="Follow us on Twitter"><i class="fab fa-twitter"></i></a>
-          <a href="#" aria-label="Follow us on Instagram"><i class="fab fa-instagram"></i></a>
-          <a href="#" aria-label="Subscribe to our YouTube channel"><i class="fab fa-youtube"></i></a>
-        </div>
+        <div class="mobile-social-links" style="display:none;"></div>
       </nav>
     </div>
   </header>
@@ -284,35 +275,36 @@
         <img id="modalImage" src="" alt="Article image">
         <button class="modal-close" aria-label="Close article modal">&times;</button>
       </div>
-      <div class="modal-body">
-        <div class="modal-meta">
-          <span id="modalCategory" class="modal-category"></span>
-        </div>
-        <h1 id="modalTitle" class="modal-title"><span class="sr-only">Article Title</span></h1>
-        <!-- Social Sharing Bar -->
-        <div id="modalShareBar" class="modal-share-bar" aria-label="Share this article">
-          <button class="share-btn" id="shareFacebook" aria-label="Share on Facebook"><i class="fab fa-facebook"></i></button>
-          <button class="share-btn" id="shareTwitter" aria-label="Share on Twitter"><i class="fab fa-twitter"></i></button>
-          <button class="share-btn" id="shareWhatsApp" aria-label="Share on WhatsApp"><i class="fab fa-whatsapp"></i></button>
-          <button class="share-btn" id="shareEmail" aria-label="Share via Email"><i class="fas fa-envelope"></i></button>
-        </div>
-        <div id="modalVideo" class="modal-video"></div>
-        <div id="modalContent" class="modal-text"></div>
-        <!-- Comments Section -->
-        <section id="modalComments" class="modal-comments" aria-label="Comments">
-          <h2 class="comments-title">Comments</h2>
-          <ul id="commentsList" class="comments-list"></ul>
-          <form id="commentForm" class="comment-form">
-            <input type="text" id="commentName" placeholder="Your Name" required aria-label="Your Name">
-            <textarea id="commentText" placeholder="Your Comment" required aria-label="Your Comment"></textarea>
-            <button type="submit">Add Comment</button>
-          </form>
-        </section>
+      <h1 id="modalTitle" class="modal-title"><span class="sr-only">Article Title</span></h1>
+      <!-- Social Sharing Bar -->
+      <div id="modalShareBar" class="modal-share-bar" aria-label="Share this article">
+        <button class="share-btn" id="shareFacebook" aria-label="Share on Facebook"><i class="fab fa-facebook"></i></button>
+        <button class="share-btn" id="shareTwitter" aria-label="Share on Twitter"><i class="fab fa-twitter"></i></button>
+        <button class="share-btn" id="shareWhatsApp" aria-label="Share on WhatsApp"><i class="fab fa-whatsapp"></i></button>
+        <button class="share-btn" id="shareEmail" aria-label="Share via Email"><i class="fas fa-envelope"></i></button>
       </div>
+      <div id="modalVideo" class="modal-video"></div>
+      <div id="modalContent" class="modal-text"></div>
+      <!-- Comments Section -->
+      <section id="modalComments" class="modal-comments" aria-label="Comments">
+        <h2 class="comments-title">Comments</h2>
+        <ul id="commentsList" class="comments-list"></ul>
+        <form id="commentForm" class="comment-form">
+          <input type="text" id="commentName" placeholder="Your Name" required aria-label="Your Name">
+          <textarea id="commentText" placeholder="Your Comment" required aria-label="Your Comment"></textarea>
+          <button type="submit">Add Comment</button>
+        </form>
+      </section>
     </div>
   </div>
 
   <footer role="contentinfo">
+    <div class="footer-social-links" style="display:flex;justify-content:center;gap:1.5rem;margin-bottom:1rem;">
+      <a href="#" aria-label="Follow us on Facebook"><i class="fab fa-facebook"></i></a>
+      <a href="#" aria-label="Follow us on Twitter"><i class="fab fa-twitter"></i></a>
+      <a href="#" aria-label="Follow us on Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="#" aria-label="Subscribe to our YouTube channel"><i class="fab fa-youtube"></i></a>
+    </div>
     <p>&copy; 2025 Newsweek Kenya. All rights reserved. | <a href="#" id="privacyPolicyLink">Privacy Policy</a></p>
   </footer>
   <!-- Cookie Consent Banner -->

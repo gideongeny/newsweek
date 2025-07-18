@@ -91,6 +91,7 @@ function closeModalFunc(modal) {
   modal.classList.remove('active');
   modal.setAttribute('aria-hidden', 'true');
   if (modal._removeTrap) modal._removeTrap();
+  document.body.style.overflow = '';
 }
 
 // Subscription modal accessibility
@@ -498,27 +499,24 @@ newsSections.forEach(section => {
 
 // Attach modal and search logic after initial news load
 function attachModalAndSearchLogic() {
-  // Re-attach news-card click for modal
   document.querySelectorAll('.news-card').forEach(card => {
     card.addEventListener('click', function() {
-      const title = this.querySelector('h3').textContent;
-      const category = this.querySelector('.category')?.textContent || '';
-      const content = this.querySelector('p').textContent;
+      // Find article data from card attributes or content
+      const title = this.querySelector('h3')?.textContent || '';
       const img = this.querySelector('img');
-      const video = this.querySelector('.video-container');
+      const summary = this.querySelector('p')?.textContent || '';
+      // Populate modal
       document.getElementById('modalTitle').textContent = title;
-      document.getElementById('modalCategory').textContent = category;
-      document.getElementById('modalContent').innerHTML = `<p>${content}</p>`;
       if (img) {
         document.getElementById('modalImage').src = img.src;
         document.getElementById('modalImage').alt = img.alt;
       }
-      if (video) {
-        document.getElementById('modalVideo').innerHTML = video.innerHTML;
-      } else {
-        document.getElementById('modalVideo').innerHTML = '';
-      }
-      openModal(articleModal);
+      document.getElementById('modalContent').innerHTML = `<p>${summary}</p>`;
+      document.getElementById('modalVideo').innerHTML = '';
+      // Show modal
+      document.getElementById('articleModal').classList.add('active');
+      document.getElementById('articleModal').setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
     });
   });
   // Re-attach search
@@ -536,9 +534,9 @@ function attachModalAndSearchLogic() {
     });
   }
 }
-// Attach after initial load
+// Call this after rendering news cards
 window.addEventListener('DOMContentLoaded', () => {
-  setTimeout(attachModalAndSearchLogic, 1000);
+  attachModalAndSearchLogic();
 });
 
 modalClose.addEventListener('click', () => {
