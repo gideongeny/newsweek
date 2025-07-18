@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Newsweek Kenya - Stay Informed</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <meta name="description" content="Newsweek Kenya: Stay informed with the latest breaking news, technology, world, entertainment, and science updates from Kenya and beyond.">
+  <meta name="keywords" content="Kenya, news, breaking news, technology, world, entertainment, science, Africa, Gen Z, politics, economy, sports, culture, AI, climate">
+  <link rel="canonical" href="https://newsweek-kenya.example.com/">
+  <!-- Open Graph -->
+  <meta property="og:title" content="Newsweek Kenya - Stay Informed">
+  <meta property="og:description" content="Stay informed with the latest breaking news, technology, world, entertainment, and science updates from Kenya and beyond.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://newsweek-kenya.example.com/">
+  <meta property="og:image" content="https://newsweek-kenya.example.com/images/kenya-og.jpg">
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Newsweek Kenya - Stay Informed">
+  <meta name="twitter:description" content="Stay informed with the latest breaking news, technology, world, entertainment, and science updates from Kenya and beyond.">
+  <meta name="twitter:image" content="https://newsweek-kenya.example.com/images/kenya-og.jpg">
+  <!-- Structured Data: Organization -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Newsweek Kenya",
+    "url": "https://newsweek-kenya.example.com/",
+    "logo": "https://newsweek-kenya.example.com/images/kenya-og.jpg",
+    "sameAs": [
+      "https://facebook.com/newsweekkenya",
+      "https://twitter.com/newsweekkenya",
+      "https://instagram.com/newsweekkenya",
+      "https://youtube.com/newsweekkenya"
+    ]
+  }
+  </script>
+  <!-- Structured Data: Example Article (first breaking news) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "NewsArticle",
+    "headline": "Kenya's Gen Z Movement Forces Parliament to Withdraw Controversial Security Bill",
+    "datePublished": "2025-06-27",
+    "image": [
+      "https://source.unsplash.com/1600x900/?protest,youth"
+    ],
+    "author": {
+      "@type": "Organization",
+      "name": "Newsweek Kenya"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Newsweek Kenya",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://newsweek-kenya.example.com/images/kenya-og.jpg"
+      }
+    },
+    "description": "Massive protests mark one-year anniversary of 2024 anti-tax demonstrations, sparked by recent custody death and controversial security legislation."
+  }
+  </script>
+</head>
+<body>
+  <div class="top-bar" role="banner">
+    <div class="top-bar-content">
+      <div class="weather-widget">
+        <i class="fas fa-sun"></i>
+        <span id="weather-display">Nairobi: Loading...</span>
+      </div>
+      <div class="social-links">
+        <a href="#" aria-label="Follow us on Facebook"><i class="fab fa-facebook"></i></a>
+        <a href="#" aria-label="Follow us on Twitter"><i class="fab fa-twitter"></i></a>
+        <a href="#" aria-label="Follow us on Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="#" aria-label="Subscribe to our YouTube channel"><i class="fab fa-youtube"></i></a>
+      </div>
+    </div>
+  </div>
+  <header role="banner">
+    <div class="header-content">
+      <div class="header-row">
+        <div class="logo">
+          <a href="/" aria-label="Newsweek Kenya Home">
+            <span class="logo-text">Newsweek</span>
+            <span class="logo-country">Kenya</span>
+          </a>
+        </div>
+        <button id="hamburgerBtn" class="hamburger-btn" aria-label="Open menu" aria-controls="mobileMenu" aria-expanded="false">
+          <span class="hamburger-icon"></span>
+        </button>
+      </div>
+      <div class="search-subscribe-container">
+        <div class="search-bar">
+          <input type="text" placeholder="Search news..." aria-label="Search news">
+          <button aria-label="Search"><i class="fas fa-search"></i></button>
+        </div>
+        <button class="dark-mode-toggle" id="darkModeToggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i><span class="sr-only">Dark Mode</span></button>
+        <!-- Removed desktop subscribe button here -->
+      </div>
+      <nav class="main-nav desktop-nav" role="navigation" aria-label="Main Navigation">
+        <ul>
+          <li><a href="#breaking" class="nav-item"><i class="fas fa-bolt"></i> Breaking</a></li>
+          <li><a href="#kenya" class="nav-item"><i class="fas fa-flag"></i> Kenya</a></li>
+          <li><a href="#live" class="nav-item live"><i class="fas fa-circle live-dot"></i> Live</a></li>
+          <li><a href="#technology" class="nav-item"><i class="fas fa-microchip"></i> Technology</a></li>
+          <li><a href="#world" class="nav-item"><i class="fas fa-globe"></i> World</a></li>
+          <li><a href="#africa" class="nav-item"><i class="fas fa-globe-africa"></i> Africa</a></li>
+          <li><a href="#sport" class="nav-item"><i class="fas fa-futbol"></i> Sport</a></li>
+          <li><a href="#entertainment" class="nav-item"><i class="fas fa-film"></i> Entertainment</a></li>
+          <li><a href="#science" class="nav-item"><i class="fas fa-flask"></i> Science</a></li>
+        </ul>
+      </nav>
+      <nav id="mobileMenu" class="mobile-menu" aria-label="Mobile Navigation" aria-hidden="true">
+        <button id="closeMobileMenu" class="close-mobile-menu" aria-label="Close menu">&times;</button>
+        <ul>
+          <li><a href="#breaking" class="nav-item"><i class="fas fa-bolt"></i> Breaking</a></li>
+          <li><a href="#kenya" class="nav-item"><i class="fas fa-flag"></i> Kenya</a></li>
+          <li><a href="#live" class="nav-item live"><i class="fas fa-circle live-dot"></i> Live</a></li>
+          <li><a href="#technology" class="nav-item"><i class="fas fa-microchip"></i> Technology</a></li>
+          <li><a href="#world" class="nav-item"><i class="fas fa-globe"></i> World</a></li>
+          <li><a href="#africa" class="nav-item"><i class="fas fa-globe-africa"></i> Africa</a></li>
+          <li><a href="#sport" class="nav-item"><i class="fas fa-futbol"></i> Sport</a></li>
+          <li><a href="#entertainment" class="nav-item"><i class="fas fa-film"></i> Entertainment</a></li>
+          <li><a href="#science" class="nav-item"><i class="fas fa-flask"></i> Science</a></li>
+        </ul>
+        <button class="subscribe-btn" id="subscribeBtnMobile">Subscribe</button>
+        <div class="mobile-social-links">
+          <a href="#" aria-label="Follow us on Facebook"><i class="fab fa-facebook"></i></a>
+          <a href="#" aria-label="Follow us on Twitter"><i class="fab fa-twitter"></i></a>
+          <a href="#" aria-label="Follow us on Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="#" aria-label="Subscribe to our YouTube channel"><i class="fab fa-youtube"></i></a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Subscription Modal -->
+  <div class="modal" id="subscribeModal" role="dialog" aria-modal="true" tabindex="-1" aria-label="Subscribe to Newsweek Kenya">
+    <div class="modal-content">
+      <button class="close-modal" aria-label="Close subscription modal">
+        <i class="fas fa-times"></i>
+      </button>
+      <h2>Subscribe to Newsweek Kenya</h2>
+      <p>Get the latest news delivered to your inbox daily.</p>
+      <form class="subscription-form">
+        <input type="text" placeholder="Full Name" required>
+        <input type="email" placeholder="Email Address" required>
+        <button type="submit">Subscribe Now</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="slideshow-container">
+    <div class="slides">
+      <div class="slide active">
+        <img src="images/Kenyan AI app translates speech to sign language.jpg" alt="Kenyan AI app translates speech to sign language" loading="lazy">
+        <div class="slide-content">
+          <h2>Kenyan AI App Breakthrough</h2>
+          <p>New app translates speech to sign language, boosting accessibility</p>
+        </div>
+      </div>
+      <div class="slide">
+        <img src="images/Safaricom rolls out 5G across Kenya.jpg" alt="Safaricom rolls out 5G across Kenya" loading="lazy">
+        <div class="slide-content">
+          <h2>Safaricom Rolls Out 5G</h2>
+          <p>Kenya's largest telco launches 5G in major cities</p>
+        </div>
+      </div>
+      <div class="slide">
+        <img src="images/Maasai Olympics empower women.webp" alt="Maasai Olympics empower women" loading="lazy">
+        <div class="slide-content">
+          <h2>Maasai Olympics Empower Women</h2>
+          <p>Sports event drives gender equality in Maasai communities</p>
+        </div>
+      </div>
+    </div>
+    <button class="slide-nav prev" aria-label="Previous slide">
+      <i class="fas fa-chevron-left"></i>
+    </button>
+    <button class="slide-nav next" aria-label="Next slide">
+      <i class="fas fa-chevron-right"></i>
+    </button>
+  </div>
+
+  <div class="live-ticker">
+    <div class="ticker-container">
+      <div class="ticker-content">
+        <div class="ticker-item">
+          <span class="ticker-time">14:30</span>
+          <span class="ticker-text">Breaking: Parliament passes controversial cybersecurity bill amid protests</span>
+        </div>
+        <div class="ticker-item">
+          <span class="ticker-time">14:15</span>
+          <span class="ticker-text">Live: Police deploy tear gas as demonstrations intensify in Nairobi CBD</span>
+        </div>
+        <div class="ticker-item">
+          <span class="ticker-time">14:00</span>
+          <span class="ticker-text">Update: Opposition leaders call for nationwide peaceful protests</span>
+        </div>
+        <!-- Duplicate items for seamless looping -->
+        <div class="ticker-item">
+          <span class="ticker-time">14:30</span>
+          <span class="ticker-text">Breaking: Parliament passes controversial cybersecurity bill amid protests</span>
+        </div>
+        <div class="ticker-item">
+          <span class="ticker-time">14:15</span>
+          <span class="ticker-text">Live: Police deploy tear gas as demonstrations intensify in Nairobi CBD</span>
+        </div>
+        <div class="ticker-item">
+          <span class="ticker-time">14:00</span>
+          <span class="ticker-text">Update: Opposition leaders call for nationwide peaceful protests</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <main role="main">
+    <section id="breaking" class="news-section">
+      <div class="section-header">
+        <h2><i class="fas fa-bolt"></i> Breaking News</h2>
+        <div class="section-controls">
+          <button class="refresh-btn" aria-label="Refresh content"><i class="fas fa-sync-alt"></i></button>
+          <button class="view-all-btn">View All</button>
+        </div>
+      </div>
+      <div class="news-grid featured-grid"></div>
+    </section>
+
+    <section id="kenya" class="news-section">
+      <div class="section-header">
+        <h2><i class="fas fa-flag"></i> Kenya</h2>
+      </div>
+      <div class="news-grid"></div>
+    </section>
+
+    <section id="live" class="news-section">
+      <div class="section-header">
+        <h2><i class="fas fa-circle live-dot"></i> Live News</h2>
+      </div>
+      <div class="news-grid"></div>
+    </section>
+
+    <section id="technology" class="news-section">
+      <h2>Technology</h2>
+      <div class="news-grid"></div>
+    </section>
+
+    <section id="world" class="news-section">
+      <h2>World News</h2>
+      <div class="news-grid"></div>
+    </section>
+
+    <section id="entertainment" class="news-section">
+      <h2>Entertainment</h2>
+      <div class="news-grid"></div>
+    </section>
+
+    <section id="science" class="news-section">
+      <h2>Science</h2>
+      <div class="news-grid"></div>
+    </section>
+
+    <section id="africa" class="news-section">
+      <div class="section-header">
+        <h2><i class="fas fa-globe-africa"></i> Africa</h2>
+      </div>
+      <div class="news-grid"></div>
+    </section>
+
+    <section id="sport" class="news-section">
+      <div class="section-header">
+        <h2><i class="fas fa-futbol"></i> Sport</h2>
+      </div>
+      <div class="news-grid"></div>
+    </section>
+  </main>
+
+  <!-- Article Modal -->
+  <div id="articleModal" class="modal" role="dialog" aria-modal="true" tabindex="-1" aria-label="Article Details">
+    <div class="modal-content">
+      <div class="modal-header">
+        <img id="modalImage" src="" alt="Article image">
+        <button class="modal-close" aria-label="Close article modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-meta">
+          <span id="modalCategory" class="modal-category"></span>
+        </div>
+        <h1 id="modalTitle" class="modal-title"><span class="sr-only">Article Title</span></h1>
+        <!-- Social Sharing Bar -->
+        <div id="modalShareBar" class="modal-share-bar" aria-label="Share this article">
+          <button class="share-btn" id="shareFacebook" aria-label="Share on Facebook"><i class="fab fa-facebook"></i></button>
+          <button class="share-btn" id="shareTwitter" aria-label="Share on Twitter"><i class="fab fa-twitter"></i></button>
+          <button class="share-btn" id="shareWhatsApp" aria-label="Share on WhatsApp"><i class="fab fa-whatsapp"></i></button>
+          <button class="share-btn" id="shareEmail" aria-label="Share via Email"><i class="fas fa-envelope"></i></button>
+        </div>
+        <div id="modalVideo" class="modal-video"></div>
+        <div id="modalContent" class="modal-text"></div>
+        <!-- Comments Section -->
+        <section id="modalComments" class="modal-comments" aria-label="Comments">
+          <h2 class="comments-title">Comments</h2>
+          <ul id="commentsList" class="comments-list"></ul>
+          <form id="commentForm" class="comment-form">
+            <input type="text" id="commentName" placeholder="Your Name" required aria-label="Your Name">
+            <textarea id="commentText" placeholder="Your Comment" required aria-label="Your Comment"></textarea>
+            <button type="submit">Add Comment</button>
+          </form>
+        </section>
+      </div>
+    </div>
+  </div>
+
+  <footer role="contentinfo">
+    <p>&copy; 2025 Newsweek Kenya. All rights reserved. | <a href="#" id="privacyPolicyLink">Privacy Policy</a></p>
+  </footer>
+  <!-- Cookie Consent Banner -->
+  <div id="cookieConsent" class="cookie-consent" role="dialog" aria-live="polite" aria-label="Cookie consent" tabindex="-1" style="display:none;">
+    <span>We use cookies to ensure you get the best experience on our website. <a href="#" id="cookiePrivacyLink">Learn more</a>.</span>
+    <button id="acceptCookies" class="subscribe-btn" aria-label="Accept cookies">Accept</button>
+  </div>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
